@@ -5,6 +5,10 @@ CIS*4800
 Assignment 2
 *************************
 
+** Compilation **
+- Type "make" to compile.
+- Type "./a2 <filename>" to run with the specified file.
+
 
 ** Assumptions **
 - The program assumes that the file is of the specified format.
@@ -45,7 +49,7 @@ Assignment 2
              in the assignment, ignore it)
     textures/ : Texture files given.
 
-** File format **
+** Input File format **
 Input files follow the standard format for PGM files. That is, they are of the
 format:
 

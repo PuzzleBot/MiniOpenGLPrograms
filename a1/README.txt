@@ -7,7 +7,7 @@ Assignment 1
 
 ** Compilation **
 - Type "make" to compile.
-- Type "a1 <filename>" to run with the specified file.
+- Type "./a1 <filename>" to run with the specified file.
 
 
 ** Assumptions **
@@ -27,8 +27,8 @@ File organization:
     shapeData.c : Code regarding parsing and storing file data.
 
 
-Input File Format
-=================
+** Input File Details **
+
 The first line of the file is a list of headings for each column in
 the file. Every input file will have this line.
 
