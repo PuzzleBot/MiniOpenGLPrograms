@@ -1,0 +1,135 @@
+
+
+Assignment 1 - Transformations
+------------------------------
+Your program will read an input file which describes objects in a 3D scene and draw
+the objects using OpenGL. There are two parts to drawing the scene. The first
+is drawing a simple scene where each line of the input file describes a
+single object to be drawn. The second part involves recursive drawing where each line
+in the file is drawn starting where an object from the previous line was drawn.
+
+The sample code for the assignment creates the scene using different lighting
+and drawing parameters. These can be switched to by typing the keys 1, 2, 3, and 4.
+Do not break this functionality in the program. You can exit the program using the
+q key. The program is run by typing the executable name and an input file name.
+	e.g.
+	a1 infile1.txt
+
+
+Part I - Reading the Input File
+--------------------------------
+Read the input file into a data structure on your program.
+
+The input file format is described in the file fileformat.txt.
+
+The starting code for this assignment uses command line inputs to pass the
+input file name to the program. Use this to pass input to the program. 
+
+
+Part II - Non-Recursive Drawing
+-------------------------------
+For each line in the input file draw the object which it describes. You will need
+to use the following items from the file:
+	-shape
+	-colour
+	-size
+	-inx, iny, inz
+	-inxr, inyr, inzr
+	-inxs, inys, inzs
+These provide all of the necessary information to draw the objects.
+You do not need to use the iterations values or any of the offset values for
+this part of the assignment.
+
+
+Part III - Recursive Drawing
+----------------------------
+This part of the program will draw each line in the input file as though they are related.
+Each object from the first line will have a complete set of the object from later lines 
+associate with it. The transformations for each object will be relative to the position where
+the last object from the previous input file was drawn. For example, if the first line of the
+files describes a cube drawn at location (1, 1, 3) with a rotation of (30, 0, 0) then an
+object from the second line of the file  will start with those parameters. Any transformations for
+the second line object will start where the first line object was placed. This is repeated for each
+object on each line of the file. 
+
+Example file:
+        iterations            translation  rotation
+cube    2                     1  1  3      30   0   0
+sphere  3                     1  1  1      0   30   0
+cone    2                     0  0  1      0    0   0
+
+In the above sample file there would be two cubes drawn. For each cube there will be three
+spheres drawn. For each sphere there will be one cone drawn. That means there will
+be a total of 20 objects drawn (2 cubes + 6 spheres + 12 cones).
+
+The program will need to process files which contain iteration values which are
+greater than 1. These are to drawn using recursion.  Start with the first line of
+the file and recursively apply the following algorithm to the input data. 
+Use the number of lines in the file and the iterations column values to control the iterations.
+
+-for each object on the current line (for each iteration)
+	-draw the object
+	-recursively move to the next line and start applying this algorithm
+	 to that line (if there is no line following the current line then move
+	 to the next step)
+	-move to the next object on the current line
+
+The input file contains offset values which describe how much each object is translated
+when it is drawn.  The first object from each line is not offset. Each iteration after
+the first will have the offset applied. From the above example file:
+	-the two cubes are drawn once, the second cube will have the offsets applied
+	-the three spheres will be drawn twice, the first sphere has no offset, the second
+	 sphere will have one times the offsets applied, the third sphere will have two
+	 times the offsets applied 
+	-the two cones will be drawn six times and the second cone will always have one
+	 offset applied
+The offsets are in the input file under the columns:
+	-xoff, yoff, zoff
+	-xroff, yroff, zroff
+	-xsoff, ysoff, zsoff
+You can use these and the iterations values from the input file to draw the recursive images.
+
+
+Development Notes:
+------------------
+Use these commands to draw the shapes:
+   glutSolidCube()
+   glutSolidCone()
+   glutSolidSphere()
+   glutSolidTorus()
+
+You can use these commands to perform the transformations:
+   glTranslatef()
+   glRotatef()
+   glScalef()
+
+You will likely want to use glPushMatrix() and glPopMatrix() to
+store and retrieve the transformation matrices during the recursive
+step. You can use glLoadIdentity() if you wish but it isn't needed and
+will likely not be very useful for this assignment.
+
+
+Handin Notes
+------------
+Submit the assignment using the dropbox for assignment 1 in Courselink.
+
+Include a readme.txt which contains your name, student number, and a short description
+of any parts of the program which do not function correctly. For instance, if
+your program correctly reads the file and draws the non-recursive images
+but does not always work correctly with the recursive files then write a sentence
+describing this functionality.
+
+The program will be tested with two types of input files. Some which are non-recursive
+which means all of the iteration values in the file will be set to 1. The second type 
+of files will have some of the iteration values set to greater than 1.
+
+Your code must run on the Macs in Reynolds 114.
+
+Submit your source files necessary to compile your code, a makefile that
+will compile the code, and any other file necessary to build the project.
+The assignment will be compiled following these steps by:
+        -unpacking your submission (tar or zip)
+        -typing make
+	-running a1 <filename> from the command line
+Any executables in the directory will be removed before make is run.
+
