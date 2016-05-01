@@ -5,6 +5,8 @@ This repository contains my work for the Computer Graphics course at the Univers
 This is a simple program which displays tranformed spheres, cubes and cones from a file containing specifications. Each object specification defines which object is displayed (sphere, cube or cone), its initial transformation, an offset transformation, and how many times the offset transformation should be performed. 
 The shape after EVERY offset tranformation is displayed.
 
+## a2: Heightmap display and shading
+This is a program which displays a heightmap from a file, and can apply different types of shading and colour schemes to the heightmap.
 
 
 

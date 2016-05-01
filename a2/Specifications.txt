@@ -1,0 +1,99 @@
+> CIS*4800 - Assignment 2 - Heightmaps, Normal Approximation
+> -----------------------------------------------------------
+> Due: Monday, Feb. 29, at midnight
+> 
+> Write an OpenGL program which creates a heightmap model, shade the model, and apply several colour
+> schemes to the model..
+> 
+> 
+> Part I - Height maps and Normal Approximation
+> --------------------------------------------
+> 
+> Read an image file and use it to create a three dimensional surface called a height map.
+> 
+> Height maps are used to represent complex terrain surfaces but they only store one of the three coordinates
+> for each vertex. Read the height map from a pgm file and store it in a two dimensional array. Create a model
+> out of triangles using the height and width of the array as the x and z coordinates, use the value read
+> from the image (and stored in the array) as they y coordinate. You will likely need to multiply all of these
+> values to make the model fit the program window.  A zero in the array indicates the minimum height and the
+> largest value in the image (depth) indicates the maximum height of the model.
+> 
+> The pgm files we are using is monochrome so it will have one value per pixel. The pgm files have
+> the format:
+> 
+> P2
+> width height depth
+> numbers ...
+> 
+> The P2 is a header which indicates a gray scale ASCII file.
+> The height and width are the dimensions of the image. The depth is the maximum value of any of the numbers.
+> The numbers are the image information. Any type and amount of whitespace can appear between any of the
+> fields in the file. Comments can appear on any line starting with a #.
+> 
+> Read the name of the input file from the command line. The program should work as follows:
+> 	a2 <filename>
+> where <filename> is the .pgm file name.
+> 
+> The polygons created from the height map should be triangles. Use glVertex3*() to create the vertices for
+> the triangles.  Calculate the normal vector for each triangle.  Once this is done calculate the normal
+> vector for each vertex by averaging the normals for all surfaces adjacent to a vertex. The number of surfaces
+> used to calculate the average normal vector will vary at the edges of the height map. Make sure the normals are all
+> one unit long (unit normals). 
+> 
+> Make the initial height map a medium gray colour. 
+> 
+> Store the calculated normal and the diffuse colour for each vertex. The colour will be used later in
+> the assignment.
+> 
+> The user should be able to scale the heightmap in the Y axis (up/down) by clicking on the right mouse
+> button and moving the mouse up and down.
+> 
+> The viewpoint should always point towards the object.  The user should be able to push the left mouse button
+> to rotate around the object. They should also be able to zoom in and out by using pushing the left mouse button
+> and moving the mouse up or down. Set the initial viewpoint location so the object is visible. Make sure the controls
+> make it easy to move the viewpoint and view the object. Place a light above and off centre of the object.
+> Make the window to display the image large enough to easily see the object.  It should be at least 1024x768.
+> Toggle between flat and smooth shading on the surface with the keys 1 and 2 respectively. Use ambient, diffuse,
+> and specular lighting.
+> 
+> 
+> Part II - Colour Variations
+> ---------------------------
+> 
+> Create several colour variations of the surface. The 3 key will be the default gray colour scheme for the object.
+> 
+> The 4 key will colour the polygons based on their height in the object.  The bottom third should be brown,
+> the middle third should be green, and the top third should be white. Set the ambient and diffuse colours
+> when this button is pressed.
+> 
+> The 5 key will randomize the colours at each vertex.  It should add a small random value to each vertex
+> colour. Experiment with the values but normally a change of +5% to -5% (or +10% to -10%) of the maximum value
+> is enough to see.  Make sure the colour values don't exceed the maximum and minimum values for the system.
+> 
+> Choose parameters which make the operations of the system easy to see.
+> 
+> 
+> Handin Notes
+> ------------
+> 
+> Submit the assignment using the dropbox for assignment 2 in Courselink.
+> 
+> Include a readme.txt which contains your name, student number, and a short description
+> of any parts of the program which do not function correctly.
+> 
+> The program will be tested with two types of input files. Some which are non-recursive
+> which means all of the iteration values in the file will be set to 1. The second type 
+> of files will have some of the iteration values set to greater than 1.
+> 
+> Your code must run on the Macs in Reynolds 114.
+> 
+> Submit your source files necessary to compile your code, a makefile that
+> will compile the code, and any other file necessary to build the project.
+> The assignment will be compiled following these steps by:
+>         -unpacking your submission (tar or zip)
+>         -typing make
+> 	-running a2 <filename> from the command line
+> Any executables in the directory will be removed before make is run.
+> 
+> 
+> 
